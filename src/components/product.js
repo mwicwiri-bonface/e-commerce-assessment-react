@@ -1,28 +1,38 @@
 import React from 'react';
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardImage,
-  MDBBtn, MDBCol
-} from 'mdb-react-ui-kit';
+import { MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
 
-const Product = () => {
+const Product = ({ product }) => {
+  // Check if product is defined
+  if (!product) {
+    return null; // Return null if product is undefined
+  }
+  console.log(product)
+  // Truncate description if it's too long
+  const truncatedDescription = product.description ?
+    (product.description.length > 50 ? product.description.substring(0, 50) + "..." : product.description)
+    : '';
+
   return (
-      <MDBCol>
+    <MDBCol>
+      <a href={`/product/${product.id}`} className="text-decoration-none text-dark">
         <MDBCard>
-          <MDBCardImage src='https://mdbootstrap.com/img/new/standard/nature/184.webp' position='top' alt='...' />
+          <MDBCardImage src={product.image} position='top' alt={product.name} />
           <MDBCardBody>
-            <MDBCardTitle>Card title</MDBCardTitle>
+            <MDBCardTitle>{product.name}</MDBCardTitle>
+            <div className="d-flex align-items-center mb-2">
+              {/*<span className="me-2">{product.rating} stars</span>*/}
+              {/*<div className="text-muted">|</div>*/}
+              <span className="ms-2">${product.price}</span>
+            </div>
             <MDBCardText>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
+              {truncatedDescription}
             </MDBCardText>
-            <MDBBtn href='#'>Add to Cart</MDBBtn>
+            <MDBBtn>Add to Cart</MDBBtn>
           </MDBCardBody>
         </MDBCard>
-      </MDBCol>
+      </a>
+    </MDBCol>
   );
-}
+};
 
 export default Product;

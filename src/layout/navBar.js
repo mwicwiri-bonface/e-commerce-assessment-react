@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import {
   MDBContainer,
   MDBNavbar,
@@ -14,11 +15,31 @@ import {
   MDBBtn,
   MDBCollapse,
 } from 'mdb-react-ui-kit';
-import Home from '../pages/home';
 
 function NavBar() {
   const [openBasic, setOpenBasic] = useState(false);
-  const cartItemsCount = 5; // Example count of cart items, replace with actual count from your cart state
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/v1/store/categories/');
+      setCategories(response.data.results);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  const renderCategories = () => {
+    return categories.map((category) => (
+      <MDBDropdownItem key={category.slug}>
+        <NavLink to={`/${category.slug}`} className='dropdown-item'>{category.name}</NavLink>
+      </MDBDropdownItem>
+    ));
+  };
 
   return (
     <div>
@@ -46,13 +67,7 @@ function NavBar() {
                     Categories
                   </MDBDropdownToggle>
                   <MDBDropdownMenu>
-                    <MDBDropdownItem>
-                      <NavLink to='/category1' className='dropdown-item'>Category 1</NavLink>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <NavLink to='/category2' className='dropdown-item'>Category 2</NavLink>
-                    </MDBDropdownItem>
-                    {/* Add more categories here */}
+                    {renderCategories()}
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavbarItem>
@@ -72,12 +87,11 @@ function NavBar() {
             {/* Cart Icon with Quantity */}
             <div className="position-relative">
               <MDBIcon icon='shopping-cart' className='me-3' size='2x' />
-              {cartItemsCount > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {cartItemsCount}
-                  <span className="visually-hidden">items in cart</span>
-                </span>
-              )}
+              {/* Replace cartItemsCount with actual count from your cart state */}
+              {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {cartItemsCount}
+                <span className="visually-hidden">items in cart</span>
+              </span> */}
             </div>
           </MDBCollapse>
         </MDBContainer>
