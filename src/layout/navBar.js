@@ -19,6 +19,8 @@ import {
 function NavBar() {
   const [openBasic, setOpenBasic] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [keywordSuggestions, setKeywordSuggestions] = useState([]);
 
   useEffect(() => {
     fetchCategories();
@@ -38,6 +40,39 @@ function NavBar() {
       <MDBDropdownItem key={category.slug}>
         <NavLink to={`/${category.slug}`} className='dropdown-item'>{category.name}</NavLink>
       </MDBDropdownItem>
+    ));
+  };
+
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    setSearchQuery(value);
+    // Call a function to fetch keyword suggestions based on the value
+    fetchKeywordSuggestions(value);
+  };
+
+  const fetchKeywordSuggestions = async (value) => {
+    // You can implement your own logic to fetch keyword suggestions
+    // Here, I'm just simulating some suggestions
+    const suggestions = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
+    // Filter suggestions based on the input value
+    const filteredSuggestions = suggestions.filter(suggestion =>
+      suggestion.toLowerCase().includes(value.toLowerCase())
+    );
+    setKeywordSuggestions(filteredSuggestions);
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion);
+    setKeywordSuggestions([]);
+    // Perform search based on selected suggestion
+    // You can implement your own logic here
+  };
+
+  const renderKeywordSuggestions = () => {
+    return keywordSuggestions.map((suggestion, index) => (
+      <li key={index} className="list-group-item" onClick={() => handleSuggestionClick(suggestion)}>
+        {suggestion}
+      </li>
     ));
   };
 
@@ -80,7 +115,19 @@ function NavBar() {
             </MDBNavbarNav>
 
             <form className='d-flex input-group w-auto me-3'>
-              <input type='search' className='form-control' placeholder='Type query' aria-label='Search' />
+              <input
+                type='search'
+                className='form-control'
+                placeholder='Type query'
+                aria-label='Search'
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              {keywordSuggestions.length > 0 && (
+                <ul className="list-group position-absolute w-100">
+                  {renderKeywordSuggestions()}
+                </ul>
+              )}
               <MDBBtn color='primary'>Search</MDBBtn>
             </form>
 

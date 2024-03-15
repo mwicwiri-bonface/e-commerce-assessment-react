@@ -7,6 +7,7 @@ import Products from "./pages/products";
 import React from "react";
 import SignUp from "./pages/signUp";
 import Login from "./pages/login";
+import ProductDetail from "./pages/productDetail";
 
 
 
@@ -19,6 +20,8 @@ function App() {
         <Route path="/products" element={<Products/>} />
         <Route path="/sign-up" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/product/:slug/" element={<ProductDetail/>} />
+        {/*<Route path="/category/:slug/" element={<CategoryDetail/>} />*/}
       </Routes>
       <Footer/>
     </div>

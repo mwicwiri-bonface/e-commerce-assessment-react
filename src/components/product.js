@@ -1,5 +1,15 @@
 import React from 'react';
-import { MDBCol, MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
+import {
+  MDBCol,
+  MDBCard,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBBtn,
+  MDBRipple
+} from 'mdb-react-ui-kit';
+import {Link} from "react-router-dom";
 
 const Product = ({ product }) => {
   // Check if product is defined
@@ -14,9 +24,18 @@ const Product = ({ product }) => {
 
   return (
     <MDBCol>
-      <a href={`/product/${product.id}`} className="text-decoration-none text-dark">
+      <Link to={`/product/${product.slug}`} className="text-decoration-none text-dark">
         <MDBCard>
-          <MDBCardImage src={product.image} position='top' alt={product.name} />
+          <MDBRipple
+              className='bg-image hover-overlay shadow-1-strong rounded'
+              rippleTag='div'
+              rippleColor='light'
+          >
+            <MDBCardImage src={product.image} position='top' alt={product.name}/>
+            <Link to={`/product/${product.slug}`}>
+              <div className='mask' style={{backgroundColor: 'rgba(251, 251, 251, 0.2)'}}></div>
+            </Link>
+          </MDBRipple>
           <MDBCardBody>
             <MDBCardTitle>{product.name}</MDBCardTitle>
             <div className="d-flex align-items-center mb-2">
@@ -30,7 +49,7 @@ const Product = ({ product }) => {
             <MDBBtn>Add to Cart</MDBBtn>
           </MDBCardBody>
         </MDBCard>
-      </a>
+      </Link>
     </MDBCol>
   );
 };
