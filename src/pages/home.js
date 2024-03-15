@@ -49,22 +49,22 @@ const Home = () => {
               </MDBContainer>
           </div>
           <MDBContainer className={"mt-3"} fluid>
-
-             <MDBRow className='row-cols-2 row-cols-lg-5 g-2 g-lg-3'>
-              {products.map((product) => (
-                <Product key={product.id} product={product} />
-              ))}
-            </MDBRow>
-            {nextPage && (
-              <div className="d-flex justify-content-center mt-3">
-                <button className="btn btn-primary" onClick={fetchNextPage}>Load More</button>
-              </div>
-            )}
-            {error && (
-              <div className="alert alert-danger mt-3" role="alert">
-                {error}
-              </div>
-            )}
+              <h1 className="text-center">Products</h1>
+              <MDBRow className='row-cols-2 row-cols-lg-5 g-2 g-lg-3'>
+                  {products.map((product) => (
+                      <Product key={product.id} product={product}/>
+                  ))}
+              </MDBRow>
+              {nextPage && (
+                  <div className="d-flex justify-content-center mt-3">
+                      <button className="btn btn-primary" onClick={fetchNextPage}>Load More</button>
+                  </div>
+              )}
+              {error && (
+                  <div className="alert alert-danger mt-3" role="alert">
+                      {error}
+                  </div>
+              )}
           </MDBContainer>
       </div>
   );

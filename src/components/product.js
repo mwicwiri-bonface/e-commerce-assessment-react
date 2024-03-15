@@ -10,18 +10,25 @@ import {
   MDBRipple
 } from 'mdb-react-ui-kit';
 import {Link} from "react-router-dom";
+import addToCart from "../actions/cartActions";
+import {useDispatch} from "react-redux";
 
 const Product = ({ product }) => {
   // Check if product is defined
   if (!product) {
     return null; // Return null if product is undefined
   }
+
+  // const dispatch = useDispatch();
+  //
+  // const handleAddToCart = () => {
+  //   dispatch(addToCart(product)); // Dispatch addToCart action with the product as payload
+  // };
   console.log(product)
   // Truncate description if it's too long
   const truncatedDescription = product.description ?
     (product.description.length > 50 ? product.description.substring(0, 50) + "..." : product.description)
     : '';
-
   return (
     <MDBCol>
       <Link to={`/product/${product.slug}`} className="text-decoration-none text-dark">
@@ -46,7 +53,7 @@ const Product = ({ product }) => {
             <MDBCardText>
               {truncatedDescription}
             </MDBCardText>
-            <MDBBtn>Add to Cart</MDBBtn>
+            <MDBBtn onClick={handleAddToCart}>Add to Cart</MDBBtn>
           </MDBCardBody>
         </MDBCard>
       </Link>
