@@ -24,6 +24,5 @@ export function logOutSuccess() {
 }
 
 export function setUserProfile(payload) {
-  console.log("setting user profile >>>>", payload)
   return { type: actionTypes.SET_USER_PROFILE, payload: payload }
 }

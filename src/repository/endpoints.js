@@ -10,5 +10,3 @@ export const categoriesUrl = `${storeBaseUrl}categories/`;
 export const productsUrl = `${storeBaseUrl}products/`;
 //
 export const getProductDetailUrl = (slug) => `${storeBaseUrl}/product-detail/${slug}/`;
-// export const getOrderItemDetailUrl = (id) =>
-//   `${ordersBaseUrl}vendor-order-item/${id}/`;

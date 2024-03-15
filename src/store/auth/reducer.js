@@ -6,6 +6,8 @@ export const initState = {
   refresh: null,
   user_id: null,
   userProfile: null,
+  products: null,
+  cartItems: null
 }
 
 function reducer(state = initState, action) {
@@ -25,6 +27,18 @@ function reducer(state = initState, action) {
           is_customer: null,
           is_vendor: null,
         },
+      }
+
+    case actionTypes.SET_PRODUCTS:
+      return {
+        ...state,
+        ...{ products: action.payload },
+      }
+
+    case actionTypes.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...{ cartItems: action.payload },
       }
 
     case actionTypes.SET_USER_PROFILE:
