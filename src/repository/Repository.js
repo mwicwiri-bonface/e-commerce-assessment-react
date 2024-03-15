@@ -2,7 +2,6 @@ import axios from "axios";
 import { getLoggedInUser, setLoggedInUser } from "~/utilities/account-helpers";
 import { refreshTokenUrl } from "./endpoints";
 import { loginPageRoute } from "~/appconfig/routes";
-import { notification } from "antd";
 const baseDomain = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000/api/v1/";
 
 const user = getLoggedInUser();
