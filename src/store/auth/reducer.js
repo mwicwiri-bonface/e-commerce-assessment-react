@@ -29,18 +29,6 @@ function reducer(state = initState, action) {
         },
       }
 
-    case actionTypes.SET_PRODUCTS:
-      return {
-        ...state,
-        ...{ products: action.payload },
-      }
-
-    case actionTypes.SET_CART_ITEMS:
-      return {
-        ...state,
-        ...{ cartItems: action.payload },
-      }
-
     case actionTypes.SET_USER_PROFILE:
       return {
         ...state,
