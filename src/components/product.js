@@ -53,7 +53,7 @@ const Product = ({ product }) => {
             <MDBCardText>
               {truncatedDescription}
             </MDBCardText>
-            <MDBBtn onClick={handleAddToCart}>Add to Cart</MDBBtn>
+            <MDBBtn>Add to Cart</MDBBtn>
           </MDBCardBody>
         </MDBCard>
       </Link>
